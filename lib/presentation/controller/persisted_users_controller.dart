@@ -1,8 +1,8 @@
 import 'package:api_consume_and_persistence/domain/model/random_user.dart';
 import 'package:api_consume_and_persistence/translations/app_strings.dart';
-import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../domain/repositories/user_repository.dart';
 
 class PersistedUsersController extends GetxController

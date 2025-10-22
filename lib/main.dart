@@ -1,14 +1,5 @@
-import 'package:api_consume_and_persistence/domain/model/coordinates.dart';
-import 'package:api_consume_and_persistence/domain/model/dob.dart';
-import 'package:api_consume_and_persistence/domain/model/location.dart';
-import 'package:api_consume_and_persistence/domain/model/login.dart';
-import 'package:api_consume_and_persistence/domain/model/picture.dart';
 import 'package:api_consume_and_persistence/domain/model/random_user.dart';
-import 'package:api_consume_and_persistence/domain/model/registered.dart';
-import 'package:api_consume_and_persistence/domain/model/street.dart';
-import 'package:api_consume_and_persistence/domain/model/user_id.dart';
-import 'package:api_consume_and_persistence/domain/model/user_name.dart';
-import 'package:api_consume_and_persistence/domain/model/user_timezone.dart';
+import 'package:api_consume_and_persistence/hive_registrar.g.dart';
 import 'package:api_consume_and_persistence/locator.dart';
 import 'package:api_consume_and_persistence/presentation/controller/home_controller.dart';
 import 'package:api_consume_and_persistence/presentation/controller/persisted_users_controller.dart';
@@ -22,18 +13,9 @@ import 'package:hive_ce_flutter/adapters.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
-  Hive.registerAdapter(RandomUserAdapter());
-  Hive.registerAdapter(UserNameAdapter());
-  Hive.registerAdapter(LocationAdapter());
-  Hive.registerAdapter(StreetAdapter());
-  Hive.registerAdapter(CoordinatesAdapter());
-  Hive.registerAdapter(UserTimezoneAdapter());
-  Hive.registerAdapter(LoginAdapter());
-  Hive.registerAdapter(DobAdapter());
-  Hive.registerAdapter(RegisteredAdapter());
-  Hive.registerAdapter(UserIdAdapter());
-  Hive.registerAdapter(PictureAdapter());
+  Hive.registerAdapters();
   await Hive.openBox<RandomUser>(AppConstants.usersBoxName);
 
   initSl();
