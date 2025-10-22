@@ -2,6 +2,7 @@ import 'package:api_consume_and_persistence/domain/model/random_user.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/titled_column_item.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/titled_row_item.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/user_avatar.dart';
+import 'package:api_consume_and_persistence/translations/app_strings.dart';
 import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -35,12 +36,12 @@ class UserPresentationCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TitledColumnItem(
-                          title: AppConstants.phoneLabel,
+                          title: AppStrings.phoneLabel,
                           child: Text(user.phone),
                         ),
                         Gap(AppConstants.smallPadding),
                         TitledColumnItem(
-                          title: AppConstants.emailLabel,
+                          title: AppStrings.emailLabel,
                           child: FittedBox(child: Text(user.email)),
                         ),
                       ],
@@ -56,21 +57,21 @@ class UserPresentationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TitledRowItem(
-                      title: AppConstants.ageLabel,
+                      title: AppStrings.ageLabel,
                       child: Text('${user.dob.age} anos'),
                     ),
                     TitledRowItem(
-                      title: AppConstants.genderLabel,
+                      title: AppStrings.genderLabel,
                       child: Text(
-                        '${user.gender.toLowerCase() == 'male' ? AppConstants.maleGender : AppConstants.femaleGender}',
+                        '${user.gender.toLowerCase() == 'male' ? AppStrings.maleGender : AppStrings.femaleGender}',
                       ),
                     ),
                     TitledRowItem(
-                      title: AppConstants.nationalityLabel,
+                      title: AppStrings.nationalityLabel,
                       child: Text('${user.nat}'),
                     ),
                     TitledRowItem(
-                      title: AppConstants.birthLabel,
+                      title: AppStrings.birthLabel,
                       child: Text(
                         '${DateFormat("dd/MM/yyyy").format(DateTime.parse(user.dob.date))}',
                       ),

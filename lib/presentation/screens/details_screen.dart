@@ -5,6 +5,7 @@ import 'package:api_consume_and_persistence/presentation/widgets/user_location_i
 import 'package:api_consume_and_persistence/presentation/widgets/user_location_info.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/user_login_info.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/user_presentation_card.dart';
+import 'package:api_consume_and_persistence/translations/app_strings.dart';
 import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -23,7 +24,7 @@ class DetailsScreen extends GetView<PersistedUsersController> {
         builder: (controller) {
           return ElevatedButton(
             child: Text(
-              controller.isPersisted(user) ? AppConstants.removeButton : AppConstants.persistButton,
+              controller.isPersisted(user) ? AppStrings.removeButton : AppStrings.persistButton,
               style: TextStyle(fontSize: AppConstants.buttonFontSize, fontWeight: FontWeight.bold),
             ),
             style: ElevatedButton.styleFrom(
@@ -72,17 +73,17 @@ class DetailsScreen extends GetView<PersistedUsersController> {
             padding: EdgeInsetsGeometry.symmetric(horizontal: AppConstants.defaultPadding, vertical: AppConstants.defaultPadding),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                Text(AppConstants.identitySection, style: Get.theme.textTheme.headlineMedium),
+                Text(AppStrings.identitySection, style: Get.theme.textTheme.headlineMedium),
                 Gap(AppConstants.defaultPadding),
                 UserIdInfo(user: user),
                 Gap(AppConstants.defaultPadding),
-                Text(AppConstants.locationSection, style: Get.theme.textTheme.headlineMedium),
+                Text(AppStrings.locationSection, style: Get.theme.textTheme.headlineMedium),
                 Gap(AppConstants.defaultPadding),
                 UserLocationInfo(user: user),
                 Gap(AppConstants.defaultPadding),
                 UserLocationImagePreview(user: user),
                 Gap(AppConstants.defaultPadding),
-                Text(AppConstants.loginInfoSection, style: Get.theme.textTheme.headlineMedium),
+                Text(AppStrings.loginInfoSection, style: Get.theme.textTheme.headlineMedium),
                 Gap(AppConstants.defaultPadding),
                 UserLoginInfo(user: user),
               ]),

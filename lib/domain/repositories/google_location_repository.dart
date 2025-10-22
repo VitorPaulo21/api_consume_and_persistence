@@ -1,4 +1,5 @@
 import 'package:api_consume_and_persistence/domain/services/google_location_service.dart';
+import 'package:api_consume_and_persistence/translations/app_strings.dart';
 import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:api_consume_and_persistence/util/google_maps_url_generator.dart';
 import 'package:get/get.dart';
@@ -32,7 +33,7 @@ class GoogleLocationRepositoryImpl implements GoogleLocationRepository {
     );
 
     if (response['status'] != 'OK' || response['results'].isEmpty) {
-      throw Exception(AppConstants.addressNotFoundError);
+      throw Exception(AppStrings.addressNotFoundError);
     }
 
     final location = response['results'][0]['geometry']['location'];

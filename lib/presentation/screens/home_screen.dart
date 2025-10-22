@@ -1,6 +1,7 @@
 import 'package:api_consume_and_persistence/presentation/controller/home_controller.dart';
 import 'package:api_consume_and_persistence/presentation/screens/persisted_screen.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/user_list_item.dart';
+import 'package:api_consume_and_persistence/translations/app_strings.dart';
 import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen>
           Get.to(() => const PersistedScreen());
         },
       ),
-      appBar: AppBar(centerTitle: true, title: const Text(AppConstants.homeScreenTitle)),
+      appBar: AppBar(centerTitle: true, title: Text(AppStrings.homeScreenTitle)),
       body: SafeArea(
         child: controller.obx((state) {
           return AnimatedList(
@@ -47,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen>
               );
             },
           );
-        }, onEmpty: Center(child: Text(AppConstants.noUsersLoadedMessage))),
+        }, onEmpty: Center(child: Text(AppStrings.noUsersLoadedMessage))),
       ),
     );
   }

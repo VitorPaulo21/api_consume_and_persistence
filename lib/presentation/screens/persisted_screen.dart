@@ -1,5 +1,6 @@
 import 'package:api_consume_and_persistence/presentation/controller/persisted_users_controller.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/user_list_item.dart';
+import 'package:api_consume_and_persistence/translations/app_strings.dart';
 import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ class PersistedScreen extends GetView<PersistedUsersController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppConstants.persistedScreenTitle),
+        title: Text(AppStrings.persistedScreenTitle),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -26,7 +27,7 @@ class PersistedScreen extends GetView<PersistedUsersController> {
           ),
           onLoading: const Center(child: CircularProgressIndicator()),
           onError: (error) => Center(child: Text('Error: $error')),
-          onEmpty: const Center(child: Text(AppConstants.noPersistedUsersMessage)),
+          onEmpty: Center(child: Text(AppStrings.noPersistedUsersMessage)),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:api_consume_and_persistence/domain/model/random_user.dart';
+import 'package:api_consume_and_persistence/translations/app_strings.dart';
 import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,8 +28,8 @@ class PersistedUsersController extends GetxController
   Future<void> addUser(RandomUser user) async {
     await _repository.addUser(user);
     Get.snackbar(
-      AppConstants.successTitle,
-      AppConstants.userPersistedSuccess,
+      AppStrings.successTitle,
+      AppStrings.userPersistedSuccess,
       backgroundColor: Colors.grey[200],
       icon: Icon(Icons.check, color: Colors.green),
     );
@@ -36,18 +37,18 @@ class PersistedUsersController extends GetxController
   }
 
   Future<void> removeUser(RandomUser user) async {
-    Get.defaultDialog(
-      title: AppConstants.confirmTitle,
-      middleText: AppConstants.removeUserMessage,
-      textCancel: AppConstants.cancelButton,
-      textConfirm: AppConstants.confirmButton,
+      Get.defaultDialog(
+        title: AppStrings.confirmTitle,
+        middleText: AppStrings.removeUserMessage,
+        textCancel: AppStrings.cancelButton,
+        textConfirm: AppStrings.confirmButton,
       confirmTextColor: Colors.black,
       cancelTextColor: Colors.black,
       onConfirm: () async {
         await _repository.removeUser(user.uuid);
         Get.snackbar(
-          AppConstants.successTitle,
-          AppConstants.userRemovedSuccess,
+          AppStrings.successTitle,
+          AppStrings.userRemovedSuccess,
           backgroundColor: Colors.grey[200],
           icon: Icon(Icons.check, color: Colors.green),
         );

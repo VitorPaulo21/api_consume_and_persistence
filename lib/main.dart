@@ -13,6 +13,7 @@ import 'package:api_consume_and_persistence/locator.dart';
 import 'package:api_consume_and_persistence/presentation/controller/home_controller.dart';
 import 'package:api_consume_and_persistence/presentation/controller/persisted_users_controller.dart';
 import 'package:api_consume_and_persistence/presentation/screens/home_screen.dart';
+import 'package:api_consume_and_persistence/translations/app_translations.dart';
 import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,6 +42,9 @@ Future<void> main() async {
     GetMaterialApp(
       title: 'Random User App',
       debugShowCheckedModeBanner: false,
+      translations: AppTranslations(),
+      locale: const Locale('pt', 'BR'),
+      fallbackLocale: const Locale('pt', 'BR'),
       theme: ThemeData(
         colorScheme: ColorScheme.light(
           primary: Colors.purple,

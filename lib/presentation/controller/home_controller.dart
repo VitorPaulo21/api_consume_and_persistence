@@ -1,4 +1,5 @@
 import 'package:api_consume_and_persistence/domain/model/random_user.dart';
+import 'package:api_consume_and_persistence/translations/app_strings.dart';
 import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -60,9 +61,9 @@ class HomeController extends GetxController with StateMixin<List<RandomUser>> {
     } on DioException {
       if (!_noConnection) {
         Get.defaultDialog(
-          title: AppConstants.connectionErrorTitle,
-          middleText: AppConstants.connectionErrorMessage,
-          textConfirm: AppConstants.understoodButton,
+          title: AppStrings.connectionErrorTitle,
+          middleText: AppStrings.connectionErrorMessage,
+          textConfirm: AppStrings.understoodButton,
           confirmTextColor: Colors.black,
           onConfirm: () => Get.back(),
         );
