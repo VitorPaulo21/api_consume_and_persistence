@@ -1,0 +1,1 @@
+- [x] Update README.md with comprehensive documentation including description, features, installation, running, building instructions, and project structure.
