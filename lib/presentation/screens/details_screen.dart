@@ -5,6 +5,7 @@ import 'package:api_consume_and_persistence/presentation/widgets/user_location_i
 import 'package:api_consume_and_persistence/presentation/widgets/user_location_info.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/user_login_info.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/user_presentation_card.dart';
+import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -22,8 +23,8 @@ class DetailsScreen extends GetView<PersistedUsersController> {
         builder: (controller) {
           return ElevatedButton(
             child: Text(
-              controller.isPersisted(user) ? 'Remover' : 'Persistir',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              controller.isPersisted(user) ? AppConstants.removeButton : AppConstants.persistButton,
+              style: TextStyle(fontSize: AppConstants.buttonFontSize, fontWeight: FontWeight.bold),
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: controller.isPersisted(user)
@@ -49,11 +50,11 @@ class DetailsScreen extends GetView<PersistedUsersController> {
             expandedHeight: 290.0,
             floating: true,
             pinned: true,
-            elevation: 5,
+            elevation: AppConstants.appBarElevation,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadiusGeometry.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
+                bottomLeft: Radius.circular(AppConstants.appBarBorderRadius),
+                bottomRight: Radius.circular(AppConstants.appBarBorderRadius),
               ),
             ),
             flexibleSpace: FlexibleSpaceBar(
@@ -68,21 +69,21 @@ class DetailsScreen extends GetView<PersistedUsersController> {
             ),
           ),
           SliverPadding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 15, vertical: 15),
+            padding: EdgeInsetsGeometry.symmetric(horizontal: AppConstants.defaultPadding, vertical: AppConstants.defaultPadding),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                Text("Identidade", style: Get.theme.textTheme.headlineMedium),
-                Gap(15),
+                Text(AppConstants.identitySection, style: Get.theme.textTheme.headlineMedium),
+                Gap(AppConstants.defaultPadding),
                 UserIdInfo(user: user),
-                Gap(15),
-                Text("Localização", style: Get.theme.textTheme.headlineMedium),
-                Gap(15),
+                Gap(AppConstants.defaultPadding),
+                Text(AppConstants.locationSection, style: Get.theme.textTheme.headlineMedium),
+                Gap(AppConstants.defaultPadding),
                 UserLocationInfo(user: user),
-                Gap(15),
+                Gap(AppConstants.defaultPadding),
                 UserLocationImagePreview(user: user),
-                Gap(15),
-                Text("Login Info", style: Get.theme.textTheme.headlineMedium),
-                Gap(15),
+                Gap(AppConstants.defaultPadding),
+                Text(AppConstants.loginInfoSection, style: Get.theme.textTheme.headlineMedium),
+                Gap(AppConstants.defaultPadding),
                 UserLoginInfo(user: user),
               ]),
             ),

@@ -1,4 +1,5 @@
 import 'package:api_consume_and_persistence/domain/model/random_user.dart';
+import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import '../../domain/repositories/user_repository.dart';
 
 class HomeController extends GetxController with StateMixin<List<RandomUser>> {
   Ticker? _ticker;
-  int _elapsedSeconds = 4;
+  int _elapsedSeconds = AppConstants.initialElapsedSeconds;
   bool _noConnection = false;
   bool isPaused = false;
   final UserRepository _repository = Get.find<UserRepository>();
@@ -30,7 +31,7 @@ class HomeController extends GetxController with StateMixin<List<RandomUser>> {
           Logger().i("Ellapsed Time: ${elapsed.inSeconds}");
         }
         fetchNewUser();
-        _elapsedSeconds = elapsed.inSeconds + 5;
+        _elapsedSeconds = elapsed.inSeconds + AppConstants.tickerIntervalSeconds;
       }
     });
     _ticker?.start();
@@ -52,17 +53,16 @@ class HomeController extends GetxController with StateMixin<List<RandomUser>> {
       _fetchedUsers.insert(0, user);
       _listKey.currentState?.insertItem(
         0,
-        duration: const Duration(milliseconds: 500),
+        duration: AppConstants.listItemAnimationDuration,
       );
       _noConnection = false;
       change(_fetchedUsers, status: RxStatus.success());
     } on DioException {
       if (!_noConnection) {
         Get.defaultDialog(
-          title: "Ops!!",
-          middleText:
-              "Estamos com alguns problemas de conexão!!\nEntrando no modo offline! 😉",
-          textConfirm: "Entendido",
+          title: AppConstants.connectionErrorTitle,
+          middleText: AppConstants.connectionErrorMessage,
+          textConfirm: AppConstants.understoodButton,
           confirmTextColor: Colors.black,
           onConfirm: () => Get.back(),
         );

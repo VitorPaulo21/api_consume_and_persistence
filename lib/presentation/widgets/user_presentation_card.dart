@@ -1,7 +1,8 @@
 import 'package:api_consume_and_persistence/domain/model/random_user.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/titled_column_item.dart';
-import 'package:api_consume_and_persistence/presentation/widgets/titled_row_item%20copy.dart';
+import 'package:api_consume_and_persistence/presentation/widgets/titled_row_item.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/user_avatar.dart';
+import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
@@ -25,8 +26,8 @@ class UserPresentationCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  UserAvatar(user: user, radius: 50),
-                  Gap(20),
+                  UserAvatar(user: user, radius: AppConstants.largeAvatarRadius),
+                  Gap(AppConstants.largePadding),
                   Expanded(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -34,12 +35,12 @@ class UserPresentationCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TitledColumnItem(
-                          title: "Celular:",
+                          title: AppConstants.phoneLabel,
                           child: Text(user.phone),
                         ),
-                        Gap(4),
+                        Gap(AppConstants.smallPadding),
                         TitledColumnItem(
-                          title: "Email:",
+                          title: AppConstants.emailLabel,
                           child: FittedBox(child: Text(user.email)),
                         ),
                       ],
@@ -47,29 +48,29 @@ class UserPresentationCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Gap(15),
+              Gap(AppConstants.defaultPadding),
               Padding(
-                padding: const EdgeInsets.only(left: 15),
+                padding: const EdgeInsets.only(left: AppConstants.defaultPadding),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TitledRowItem(
-                      title: "Idade:",
+                      title: AppConstants.ageLabel,
                       child: Text('${user.dob.age} anos'),
                     ),
                     TitledRowItem(
-                      title: "Genero:",
+                      title: AppConstants.genderLabel,
                       child: Text(
-                        '${user.gender.toLowerCase() == 'male' ? 'Masculino' : 'Feminino'}',
+                        '${user.gender.toLowerCase() == 'male' ? AppConstants.maleGender : AppConstants.femaleGender}',
                       ),
                     ),
                     TitledRowItem(
-                      title: "Nacionalidade:",
+                      title: AppConstants.nationalityLabel,
                       child: Text('${user.nat}'),
                     ),
                     TitledRowItem(
-                      title: "Nascimento:",
+                      title: AppConstants.birthLabel,
                       child: Text(
                         '${DateFormat("dd/MM/yyyy").format(DateTime.parse(user.dob.date))}',
                       ),

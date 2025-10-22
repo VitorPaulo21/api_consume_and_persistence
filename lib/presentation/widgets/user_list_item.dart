@@ -4,6 +4,7 @@ import 'package:api_consume_and_persistence/presentation/screens/details_screen.
 import 'package:api_consume_and_persistence/presentation/widgets/user_avatar.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/user_email.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/user_name.dart';
+import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,8 +17,8 @@ class UserListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
-      margin: EdgeInsets.symmetric(vertical: 10),
+      elevation: AppConstants.cardElevation,
+      margin: EdgeInsets.symmetric(vertical: AppConstants.cardMargin),
       child: ListTile(
         key: ValueKey(user.uuid),
         leading: UserAvatar(user: user),
@@ -25,21 +26,9 @@ class UserListItem extends StatelessWidget {
         subtitle: UserEmail(user),
         trailing: removeButton
             ? IconButton(
-                splashRadius: 20,
+                splashRadius: AppConstants.buttonSplashRadius,
                 onPressed: () {
-                  Get.defaultDialog(
-                    title: "Confirma?",
-                    middleText:
-                        "Deseja remover este usuário da lista de Persistidos?",
-                    textCancel: "Cancelar",
-                    textConfirm: "Sim",
-                    confirmTextColor: Colors.black,
-                    cancelTextColor: Colors.black,
-                    onConfirm: () {
-                      Get.back();
-                      Get.find<PersistedUsersController>().removeUser(user);
-                    },
-                  );
+                  Get.find<PersistedUsersController>().removeUser(user);
                 },
                 icon: Icon(Icons.delete_forever_outlined, color: Colors.red),
               )

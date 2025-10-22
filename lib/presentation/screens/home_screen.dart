@@ -1,7 +1,7 @@
 import 'package:api_consume_and_persistence/presentation/controller/home_controller.dart';
 import 'package:api_consume_and_persistence/presentation/screens/persisted_screen.dart';
 import 'package:api_consume_and_persistence/presentation/widgets/user_list_item.dart';
-import 'package:flutter/foundation.dart';
+import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,25 +31,13 @@ class _HomeScreenState extends State<HomeScreen>
           Get.to(() => const PersistedScreen());
         },
       ),
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Lista de Usuários'),
-        actions: [
-          if (kDebugMode)
-            IconButton(
-              icon: const Icon(Icons.pause),
-              onPressed: () {
-                controller.pause();
-              },
-            ),
-        ],
-      ),
+      appBar: AppBar(centerTitle: true, title: const Text(AppConstants.homeScreenTitle)),
       body: SafeArea(
         child: controller.obx((state) {
           return AnimatedList(
             key: controller.listKey,
             initialItemCount: state!.length,
-            padding: EdgeInsets.all(15),
+            padding: EdgeInsets.all(AppConstants.defaultPadding),
             itemBuilder: (context, index, animation) {
               final user = state[index];
               return SizeTransition(
@@ -59,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen>
               );
             },
           );
-        }, onEmpty: Center(child: Text("Nenhum usuário carregado ainda..."))),
+        }, onEmpty: Center(child: Text(AppConstants.noUsersLoadedMessage))),
       ),
     );
   }

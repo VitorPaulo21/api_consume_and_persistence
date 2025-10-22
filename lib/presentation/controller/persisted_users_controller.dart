@@ -1,4 +1,5 @@
 import 'package:api_consume_and_persistence/domain/model/random_user.dart';
+import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../domain/repositories/user_repository.dart';
@@ -26,8 +27,8 @@ class PersistedUsersController extends GetxController
   Future<void> addUser(RandomUser user) async {
     await _repository.addUser(user);
     Get.snackbar(
-      'Sucesso!',
-      'Usuário persistido',
+      AppConstants.successTitle,
+      AppConstants.userPersistedSuccess,
       backgroundColor: Colors.grey[200],
       icon: Icon(Icons.check, color: Colors.green),
     );
@@ -35,14 +36,25 @@ class PersistedUsersController extends GetxController
   }
 
   Future<void> removeUser(RandomUser user) async {
-    await _repository.removeUser(user.uuid);
-    Get.snackbar(
-      'Sucesso!',
-      'Usuário removido',
-      backgroundColor: Colors.grey[200],
-      icon: Icon(Icons.check, color: Colors.green),
+    Get.defaultDialog(
+      title: AppConstants.confirmTitle,
+      middleText: AppConstants.removeUserMessage,
+      textCancel: AppConstants.cancelButton,
+      textConfirm: AppConstants.confirmButton,
+      confirmTextColor: Colors.black,
+      cancelTextColor: Colors.black,
+      onConfirm: () async {
+        await _repository.removeUser(user.uuid);
+        Get.snackbar(
+          AppConstants.successTitle,
+          AppConstants.userRemovedSuccess,
+          backgroundColor: Colors.grey[200],
+          icon: Icon(Icons.check, color: Colors.green),
+        );
+        Get.back();
+        await loadUsers();
+      },
     );
-    await loadUsers();
   }
 
   bool isPersisted(RandomUser user) {

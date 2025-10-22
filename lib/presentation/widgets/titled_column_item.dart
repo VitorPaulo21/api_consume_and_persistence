@@ -1,3 +1,4 @@
+import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -17,7 +18,7 @@ class TitledColumnItem extends StatelessWidget {
           title,
           style: DefaultTextStyle.of(
             context,
-          ).style.copyWith(fontWeight: FontWeight.bold, fontSize: 15),
+          ).style.copyWith(fontWeight: FontWeight.bold, fontSize: AppConstants.titleFontSize),
         ),
         Gap(2),
         child,

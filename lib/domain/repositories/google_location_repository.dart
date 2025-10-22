@@ -1,4 +1,6 @@
 import 'package:api_consume_and_persistence/domain/services/google_location_service.dart';
+import 'package:api_consume_and_persistence/util/app_constants.dart';
+import 'package:api_consume_and_persistence/util/google_maps_url_generator.dart';
 import 'package:get/get.dart';
 
 abstract class GoogleLocationRepository {
@@ -11,15 +13,8 @@ abstract class GoogleLocationRepository {
 }
 
 class GoogleLocationRepositoryImpl implements GoogleLocationRepository {
-  // Chave de api posicionada aqui apenas para este caso
-  static final _GOOGLE_MAPS_API_KEY = 'AIzaSyCUr-3obn3_XLd5g6lb6u0fr5Yq0V7Gy00';
-
-  String _generateLocationImageUrl({
-    required double latitude,
-    required double longitude,
-  }) {
-    return 'https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=15&size=600x400&maptype=roadmap&markers=color:red%7C$latitude,$longitude&key=$_GOOGLE_MAPS_API_KEY';
-  }
+  // TODO: Move API key to environment variables
+  static const String _GOOGLE_MAPS_API_KEY = 'AIzaSyCUr-3obn3_XLd5g6lb6u0fr5Yq0V7Gy00';
 
   @override
   Future<String> getStaticImageFromAddress({
@@ -37,13 +32,21 @@ class GoogleLocationRepositoryImpl implements GoogleLocationRepository {
     );
 
     if (response['status'] != 'OK' || response['results'].isEmpty) {
-      throw Exception('Endereço não encontrado');
+      throw Exception(AppConstants.addressNotFoundError);
     }
 
     final location = response['results'][0]['geometry']['location'];
-    final lat = location['lat'];
-    final lng = location['lng'];
+    final lat = location['lat'] as double;
+    final lng = location['lng'] as double;
 
-    return _generateLocationImageUrl(latitude: lat, longitude: lng);
+    return GoogleMapsUrlGenerator.generateStaticMapUrl(
+      latitude: lat,
+      longitude: lng,
+      apiKey: _GOOGLE_MAPS_API_KEY,
+      zoom: AppConstants.defaultMapZoom,
+      size: AppConstants.defaultMapSize,
+      mapType: AppConstants.defaultMapType,
+      markerColor: AppConstants.defaultMarkerColor,
+    );
   }
 }

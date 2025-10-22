@@ -1,4 +1,5 @@
 import 'package:api_consume_and_persistence/domain/model/random_user.dart';
+import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:get/get.dart';
 import 'package:hive_ce_flutter/adapters.dart';
 import '../services/user_api_service.dart';
@@ -13,7 +14,7 @@ abstract class UserRepository {
 
 class UserRepositoryImpl implements UserRepository {
   final UserApiService _apiService = Get.find<UserApiService>();
-  final Box<RandomUser> _box = Hive.box<RandomUser>('users');
+  final Box<RandomUser> _box = Hive.box<RandomUser>(AppConstants.usersBoxName);
 
   @override
   Future<List<RandomUser>> getAllUsers() async {

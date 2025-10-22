@@ -1,3 +1,4 @@
+import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class TitledRowItem extends StatelessWidget {
@@ -13,7 +14,7 @@ class TitledRowItem extends StatelessWidget {
         text: '$title ',
         style: DefaultTextStyle.of(
           context,
-        ).style.copyWith(fontWeight: FontWeight.bold, fontSize: 15),
+        ).style.copyWith(fontWeight: FontWeight.bold, fontSize: AppConstants.titleFontSize),
         children: [WidgetSpan(child: child)],
       ),
     );

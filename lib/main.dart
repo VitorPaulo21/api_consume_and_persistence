@@ -1,6 +1,3 @@
-import 'package:api_consume_and_persistence/presentation/controller/home_controller.dart';
-import 'package:api_consume_and_persistence/presentation/controller/persisted_users_controller.dart';
-import 'package:api_consume_and_persistence/locator.dart';
 import 'package:api_consume_and_persistence/domain/model/coordinates.dart';
 import 'package:api_consume_and_persistence/domain/model/dob.dart';
 import 'package:api_consume_and_persistence/domain/model/location.dart';
@@ -12,12 +9,15 @@ import 'package:api_consume_and_persistence/domain/model/street.dart';
 import 'package:api_consume_and_persistence/domain/model/user_id.dart';
 import 'package:api_consume_and_persistence/domain/model/user_name.dart';
 import 'package:api_consume_and_persistence/domain/model/user_timezone.dart';
+import 'package:api_consume_and_persistence/locator.dart';
+import 'package:api_consume_and_persistence/presentation/controller/home_controller.dart';
+import 'package:api_consume_and_persistence/presentation/controller/persisted_users_controller.dart';
 import 'package:api_consume_and_persistence/presentation/screens/home_screen.dart';
+import 'package:api_consume_and_persistence/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive_ce_flutter/adapters.dart';
-import 'package:logger/web.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +33,7 @@ Future<void> main() async {
   Hive.registerAdapter(RegisteredAdapter());
   Hive.registerAdapter(UserIdAdapter());
   Hive.registerAdapter(PictureAdapter());
-  await Hive.openBox<RandomUser>('users');
+  await Hive.openBox<RandomUser>(AppConstants.usersBoxName);
 
   initSl();
 
@@ -52,24 +52,16 @@ Future<void> main() async {
           backgroundColor: Colors.purple,
           foregroundColor: Colors.white,
           systemOverlayStyle: SystemUiOverlayStyle.light,
-          scrolledUnderElevation: 5,
+          scrolledUnderElevation: AppConstants.appBarElevation,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(AppConstants.appBarBorderRadius),
+              bottomRight: Radius.circular(AppConstants.appBarBorderRadius),
             ),
           ),
         ),
       ),
       home: const HomeScreen(),
-      // routingCallback: (routing) {
-      //   final HomeController controller = Get.find();
-      //   if (routing != null && routing.current != '/') {
-      //     controller.pause();
-      //   } else {
-      //     controller.play();
-      //   }
-      // },
       initialBinding: BindingsBuilder(() {
         Get.put(HomeController());
         Get.put(PersistedUsersController());
