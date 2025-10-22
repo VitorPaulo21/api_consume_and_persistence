@@ -1,5 +1,5 @@
 name: api_consume_and_persistence
-description: "A new Flutter project."
+description: "Random User App - Discover random users from around the world"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

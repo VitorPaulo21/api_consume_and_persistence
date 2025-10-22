@@ -1,11 +1,11 @@
 {
-    "name": "api_consume_and_persistence",
-    "short_name": "api_consume_and_persistence",
+    "name": "Random User App",
+    "short_name": "Random User App",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#9C27B0",
+    "theme_color": "#9C27B0",
+    "description": "Random User App - Discover random users from around the world",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
