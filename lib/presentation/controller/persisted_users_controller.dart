@@ -37,22 +37,22 @@ class PersistedUsersController extends GetxController
   }
 
   Future<void> removeUser(RandomUser user) async {
-      Get.defaultDialog(
-        title: AppStrings.confirmTitle,
-        middleText: AppStrings.removeUserMessage,
-        textCancel: AppStrings.cancelButton,
-        textConfirm: AppStrings.confirmButton,
+    Get.defaultDialog(
+      title: AppStrings.confirmTitle,
+      middleText: AppStrings.removeUserMessage,
+      textCancel: AppStrings.cancelButton,
+      textConfirm: AppStrings.confirmButton,
       confirmTextColor: Colors.black,
       cancelTextColor: Colors.black,
       onConfirm: () async {
         await _repository.removeUser(user.uuid);
+        Get.back();
         Get.snackbar(
           AppStrings.successTitle,
           AppStrings.userRemovedSuccess,
           backgroundColor: Colors.grey[200],
           icon: Icon(Icons.check, color: Colors.green),
         );
-        Get.back();
         await loadUsers();
       },
     );
