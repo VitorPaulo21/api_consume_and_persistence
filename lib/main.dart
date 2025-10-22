@@ -1,21 +1,23 @@
-import 'package:api_consume_and_persistence/controller/home_controller.dart';
-import 'package:api_consume_and_persistence/controller/persisted_users_controller.dart';
+import 'package:api_consume_and_persistence/presentation/controller/home_controller.dart';
+import 'package:api_consume_and_persistence/presentation/controller/persisted_users_controller.dart';
 import 'package:api_consume_and_persistence/locator.dart';
-import 'package:api_consume_and_persistence/model/coordinates.dart';
-import 'package:api_consume_and_persistence/model/dob.dart';
-import 'package:api_consume_and_persistence/model/location.dart';
-import 'package:api_consume_and_persistence/model/login.dart';
-import 'package:api_consume_and_persistence/model/picture.dart';
-import 'package:api_consume_and_persistence/model/random_user.dart';
-import 'package:api_consume_and_persistence/model/registered.dart';
-import 'package:api_consume_and_persistence/model/street.dart';
-import 'package:api_consume_and_persistence/model/user_id.dart';
-import 'package:api_consume_and_persistence/model/user_name.dart';
-import 'package:api_consume_and_persistence/model/user_timezone.dart';
-import 'package:api_consume_and_persistence/screens/home_screen.dart';
+import 'package:api_consume_and_persistence/domain/model/coordinates.dart';
+import 'package:api_consume_and_persistence/domain/model/dob.dart';
+import 'package:api_consume_and_persistence/domain/model/location.dart';
+import 'package:api_consume_and_persistence/domain/model/login.dart';
+import 'package:api_consume_and_persistence/domain/model/picture.dart';
+import 'package:api_consume_and_persistence/domain/model/random_user.dart';
+import 'package:api_consume_and_persistence/domain/model/registered.dart';
+import 'package:api_consume_and_persistence/domain/model/street.dart';
+import 'package:api_consume_and_persistence/domain/model/user_id.dart';
+import 'package:api_consume_and_persistence/domain/model/user_name.dart';
+import 'package:api_consume_and_persistence/domain/model/user_timezone.dart';
+import 'package:api_consume_and_persistence/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive_ce_flutter/adapters.dart';
+import 'package:logger/web.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,8 +40,36 @@ Future<void> main() async {
   runApp(
     GetMaterialApp(
       title: 'Random User App',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.light(
+          primary: Colors.purple,
+          onPrimary: Colors.white,
+          secondary: Colors.amber,
+          onSecondary: Colors.black,
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.purple,
+          foregroundColor: Colors.white,
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+          scrolledUnderElevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
+          ),
+        ),
+      ),
       home: const HomeScreen(),
+      // routingCallback: (routing) {
+      //   final HomeController controller = Get.find();
+      //   if (routing != null && routing.current != '/') {
+      //     controller.pause();
+      //   } else {
+      //     controller.play();
+      //   }
+      // },
       initialBinding: BindingsBuilder(() {
         Get.put(HomeController());
         Get.put(PersistedUsersController());

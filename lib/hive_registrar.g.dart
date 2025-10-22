@@ -3,17 +3,17 @@
 // Check in to version control
 
 import 'package:hive_ce/hive.dart';
-import 'package:api_consume_and_persistence/model/coordinates.dart';
-import 'package:api_consume_and_persistence/model/dob.dart';
-import 'package:api_consume_and_persistence/model/location.dart';
-import 'package:api_consume_and_persistence/model/login.dart';
-import 'package:api_consume_and_persistence/model/picture.dart';
-import 'package:api_consume_and_persistence/model/random_user.dart';
-import 'package:api_consume_and_persistence/model/registered.dart';
-import 'package:api_consume_and_persistence/model/street.dart';
-import 'package:api_consume_and_persistence/model/user_id.dart';
-import 'package:api_consume_and_persistence/model/user_name.dart';
-import 'package:api_consume_and_persistence/model/user_timezone.dart';
+import 'package:api_consume_and_persistence/domain/model/coordinates.dart';
+import 'package:api_consume_and_persistence/domain/model/dob.dart';
+import 'package:api_consume_and_persistence/domain/model/location.dart';
+import 'package:api_consume_and_persistence/domain/model/login.dart';
+import 'package:api_consume_and_persistence/domain/model/picture.dart';
+import 'package:api_consume_and_persistence/domain/model/random_user.dart';
+import 'package:api_consume_and_persistence/domain/model/registered.dart';
+import 'package:api_consume_and_persistence/domain/model/street.dart';
+import 'package:api_consume_and_persistence/domain/model/user_id.dart';
+import 'package:api_consume_and_persistence/domain/model/user_name.dart';
+import 'package:api_consume_and_persistence/domain/model/user_timezone.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {

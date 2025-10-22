@@ -1,0 +1,66 @@
+import 'package:api_consume_and_persistence/presentation/controller/home_controller.dart';
+import 'package:api_consume_and_persistence/presentation/screens/persisted_screen.dart';
+import 'package:api_consume_and_persistence/presentation/widgets/user_list_item.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  final HomeController controller = Get.find();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.startTicker(this);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.storage),
+        onPressed: () {
+          Get.to(() => const PersistedScreen());
+        },
+      ),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Lista de Usuários'),
+        actions: [
+          if (kDebugMode)
+            IconButton(
+              icon: const Icon(Icons.pause),
+              onPressed: () {
+                controller.pause();
+              },
+            ),
+        ],
+      ),
+      body: SafeArea(
+        child: controller.obx((state) {
+          return AnimatedList(
+            key: controller.listKey,
+            initialItemCount: state!.length,
+            padding: EdgeInsets.all(15),
+            itemBuilder: (context, index, animation) {
+              final user = state[index];
+              return SizeTransition(
+                sizeFactor: animation,
+                axis: Axis.vertical,
+                child: UserListItem(user),
+              );
+            },
+          );
+        }, onEmpty: Center(child: Text("Nenhum usuário carregado ainda..."))),
+      ),
+    );
+  }
+}
